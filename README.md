@@ -20,3 +20,17 @@ terraform apply \
 -var 'access_key=AK123456789123456789' \
 -var 'secret_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' 
 ```
+
+### memo
+
+- Check Instance Profile
+
+```
+aws iam list-instance-profiles
+```
+
+- Delete Instance Profile
+
+```
+aws iam delete-instance-profile --instance-profile-name test_profile 
+```

@@ -1,4 +1,34 @@
 #
+# Create IAM Instance Profile
+#
+resource "aws_iam_instance_profile" "test_profile" {
+    name = "test_profile"
+    roles = ["${aws_iam_role.test_role.name}"]
+}
+
+#
+# Create IAM Role
+#
+resource "aws_iam_role" "test_role" {
+    name = "test_role"
+    assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+#
 # Create IAM Role Policy
 #
 resource "aws_iam_role_policy" "test_policy" {
@@ -23,24 +53,3 @@ resource "aws_iam_role_policy" "test_policy" {
 EOF
 }
 
-#
-# Create IAM Role
-#
-resource "aws_iam_role" "test_role" {
-    name = "test_role"
-    assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
-}
-EOF
-}
