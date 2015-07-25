@@ -17,10 +17,13 @@ build:
         name: setting PATH and run terraform plan
         code: |
           export PATH=$PATH:$HOME/terraform && terraform plan -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
-
-deploy:
-  steps:
     - script:
         name: terraform apply test
         code: |
           export PATH=$PATH:$HOME/terraform && terraform apply -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
+
+  after-steps:
+    - sherzberg/slack-notify:
+        subdomain: inokappa
+        token: $SLACK_TOKEN
+        channel: general
