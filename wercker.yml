@@ -21,7 +21,7 @@ build:
     - script:
         name: run terraform plan
         code: |
-          terraform plan -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
+          terraform plan -refresh=false -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
     - script:
         name: run terraform apply 
         code: |
