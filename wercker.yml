@@ -6,10 +6,14 @@ build:
         code: |
           mkdir -p $HOME/terraform
     - script:
-        name: install wget
+        name: install wget and unzip
         code: |
-          apt-get update && apt-get -y -qq install wget
+          apt-get update && apt-get -y -qq install wget unzip
     - script:
         name: download terraform
         code: |
           cd $HOME/terraform && wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.1_linux_amd64.zip && unzip terraform_0.6.1_linux_amd64.zip
+    - script:
+        name: setting PATH and run terraform plan
+        code: |
+          export PATH=$PATH:$HOME/terraform && terraform plan -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
