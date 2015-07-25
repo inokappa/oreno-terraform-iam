@@ -1,7 +1,11 @@
-box: debian
+box: wercker/ubuntu
 build:
   steps:
     - script:
-        name: echo
+        name: create terraform directory
         code: |
-          echo "hello world!"
+          mkdir -p $HOME/terraform
+    - script:
+        name: download terraform
+        code: |
+          cd $HOME/terraform && wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.1_linux_amd64.zip && unzip terraform_0.6.1_linux_amd64.zip
