@@ -6,6 +6,10 @@ build:
         code: |
           mkdir -p $HOME/terraform
     - script:
+        name: install wget
+        code: |
+          apt-get update && apt-get install wget
+    - script:
         name: download terraform
         code: |
           cd $HOME/terraform && wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.1_linux_amd64.zip && unzip terraform_0.6.1_linux_amd64.zip
