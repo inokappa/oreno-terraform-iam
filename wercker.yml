@@ -7,7 +7,7 @@ build:
           mkdir -p $HOME/terraform
           export PATH=$PATH:$HOME/terraform
     - script:
-        name: install wget and unzip
+        name: install wget / curl / unzip
         code: |
           apt-get update
           apt-get -y -qq install wget unzip curl
