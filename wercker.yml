@@ -1,4 +1,4 @@
-box: wercker/default
+box: ubuntu
 build:
   steps:
     - script:
@@ -19,7 +19,7 @@ build:
           export PATH=$PATH:$HOME/terraform && terraform plan -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
 
 deploy:
-    steps:
+  steps:
     - script:
         name: terraform apply
         code: |
