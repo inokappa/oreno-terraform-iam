@@ -21,6 +21,6 @@ build:
 deploy:
   steps:
     - script:
-        name: terraform apply
+        name: terraform apply test
         code: |
           export PATH=$PATH:$HOME/terraform && terraform apply -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
