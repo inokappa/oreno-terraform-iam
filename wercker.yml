@@ -29,8 +29,8 @@ build:
 
   after-steps:
     - sherzberg/slack-notify:
-        subdomain: inokappa
+        subdomain: $SLACK_TEAM
         token: $SLACK_TOKEN
-        channel: "#wercker-notification"
+        channel: "$SLACK_CHANNEL"
         username: wercker
         icon_url: https://avatars3.githubusercontent.com/u/1695193?s=140
