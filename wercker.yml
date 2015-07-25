@@ -2,25 +2,30 @@ box: ubuntu
 build:
   steps:
     - script:
-        name: create terraform directory
+        name: create terraform directory and export PATH
         code: |
           mkdir -p $HOME/terraform
+          export PATH=$PATH:$HOME/terraform
     - script:
         name: install wget and unzip
         code: |
-          apt-get update && apt-get -y -qq install wget unzip curl
+          apt-get update
+          apt-get -y -qq install wget unzip curl
     - script:
         name: download terraform
         code: |
-          cd $HOME/terraform && wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.1_linux_amd64.zip && unzip terraform_0.6.1_linux_amd64.zip
+          cd $HOME/terraform 
+          wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.1_linux_amd64.zip
+          unzip terraform_0.6.1_linux_amd64.zip
+          rm terraform_0.6.1_linux_amd64.zip
     - script:
-        name: setting PATH and run terraform plan
+        name: run terraform plan
         code: |
-          export PATH=$PATH:$HOME/terraform && terraform plan -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
+          terraform plan -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
     - script:
-        name: terraform apply test
+        name: run terraform apply 
         code: |
-          export PATH=$PATH:$HOME/terraform && terraform apply -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
+          terraform apply -var "access_key=$AWS_ACCESS_KEY_ID" -var "secret_key=$AWS_SECRET_ACCESS_KEY"
 
   after-steps:
     - sherzberg/slack-notify:
